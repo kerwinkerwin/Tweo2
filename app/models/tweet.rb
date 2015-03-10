@@ -1,4 +1,8 @@
+require 'sentimental'
+
 class Tweet < ActiveRecord::Base
+  validates :tweet_id, uniqueness: true
+
   @client = Twitter::REST::Client.new do |config|
     config.consumer_key            ="1Q0ffL4w10sWMRLQD4pmMrKBJ"
     config.consumer_secret         ="yrdNi68jjzNY4IRiTK77IlLPiaD2elHFkix8dUmeFCjwZW8iV4"
@@ -11,16 +15,25 @@ class Tweet < ActiveRecord::Base
   end
 
   def self.search(query)
-    tweets = []
-    @client.search(query, result_type: "recent").take(5).each do |tweet|
+      Tweet.destroy_all
+      @client.search(query).take(40).each do |tweet|
+       Tweet.create(user_id:tweet.user.id, user_name:tweet.user.screen_name, user_location: tweet.user.location, tweet_id: tweet.id, text: tweet.text)
+      # puts tweet.user.location
+      # puts tweet.user.id
+      # puts tweet.user.screen_name
+      # puts tweet.user.lang
+      # puts tweet.text
+      # puts tweet.id
+      end
+  end
 
-      puts tweet.user.location
-      puts tweet.user.id
-      puts tweet.user.screen_name
-      puts tweet.user.lang
-    end
-    tweets.each do |tweet|
-      puts Twitter.user([:user]).name
+  def self.sentiment
+    Sentimental.load_defaults
+    Sentimental.threshold = 0.1
+    analyzer = Sentimental.new
+    Tweet.all.each do | tweet|
+       tweet.update(score:analyzer.get_score(tweet.text))
+       puts tweet.score
     end
   end
 
