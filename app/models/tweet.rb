@@ -11,7 +11,17 @@ class Tweet < ActiveRecord::Base
   end
 
   def self.search(query)
-    @client.search(query, result_type: "recent").take(10)
+    tweets = []
+    @client.search(query, result_type: "recent").take(5).each do |tweet|
+
+      puts tweet.user.location
+      puts tweet.user.id
+      puts tweet.user.screen_name
+      puts tweet.user.lang
+    end
+    tweets.each do |tweet|
+      puts Twitter.user([:user]).name
+    end
   end
 
 end

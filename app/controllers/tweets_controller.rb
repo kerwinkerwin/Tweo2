@@ -1,10 +1,9 @@
 class TweetsController < ApplicationController
   def show
     @tweetsearch = Tweet.search('#fergusson')
-    @tweetsearch.each do |tweet|
-      puts tweet.text
-    end
+    puts @tweetsearch.inspect
     @friends = Tweet.friends
+
 
   end
 end
