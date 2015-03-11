@@ -2,6 +2,7 @@ class TweetsController < ApplicationController
   def show
     Tweet.search('#racism')
     Tweet.sentiment
-    # @friends = Tweet.friends
+    @tweets = Tweet.all
+    render json: @tweets
   end
 end

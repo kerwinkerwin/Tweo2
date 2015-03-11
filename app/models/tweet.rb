@@ -3,6 +3,7 @@ require 'geocoder'
 
 class Tweet < ActiveRecord::Base
   validates :tweet_id, uniqueness: true
+  validates :user_location, presence: true
   geocoded_by :user_location
   after_validation :geocode
 
