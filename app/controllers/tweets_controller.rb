@@ -1,9 +1,7 @@
 class TweetsController < ApplicationController
   def show
-    @tweetsearch = Tweet.search('#fergusson')
-    puts @tweetsearch.inspect
-    @friends = Tweet.friends
-
-
+    Tweet.search('#racism')
+    Tweet.sentiment
+    # @friends = Tweet.friends
   end
 end
