@@ -15,17 +15,36 @@
 //= require turbolinks
 //= require_tree .
 
+// showmap = {
+//   $(".search").css("display","none")
+//    $("#map-canvas").css("display","block")
+// }
+
+
 $(document).ready(function(){
-  // console.log("hello");
+   console.log("hello");
   $('form').on("submit", function(event){
     event.preventDefault()
     var data = $(this).serialize()
     var url = $(this).attr('action')
     url = url + "?"+data
-
-
     $.get(url).done(function(data){
+      map.prototype.display_map();
+      map.prototype.hide_search();
       console.log(data)
     })
   })
 })
+
+function map(){
+
+
+}
+
+map.prototype.display_map = function(){
+  $("#map-canvas").show();
+};
+
+map.prototype.hide_search = function(){
+  $(".search").hide();
+}

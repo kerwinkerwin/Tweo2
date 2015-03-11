@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
     Tweet.search(params[:q])
     Tweet.sentiment
     @tweets = Tweet.all
-    render json: @tweets
+     render json: @tweets
   end
 
   def index
