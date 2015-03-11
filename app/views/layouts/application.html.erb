@@ -8,11 +8,7 @@
 </head>
 <body>
 
-  <%= form_tag("/tweets/show", method: "get") do %>
-  <%= label_tag(:q, "Seach for:")%>
-  <%= text_field_tag(:q)%>
-  <%= submit_tag("Search")%>
-  <% end %>
+  
 
 <%= yield %>
 

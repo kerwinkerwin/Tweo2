@@ -10,9 +10,22 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//=require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
 
-Console.log("hello")
+$(document).ready(function(){
+  // console.log("hello");
+  $('form').on("submit", function(event){
+    event.preventDefault()
+    var data = $(this).serialize()
+    var url = $(this).attr('action')
+    url = url + "?"+data
+
+
+    $.get(url).done(function(data){
+      console.log(data)
+    })
+  })
+})

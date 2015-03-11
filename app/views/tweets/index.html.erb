@@ -1,0 +1,8 @@
+hello this be the index page
+<div class = "search">
+  <%= form_tag("/tweets/show", method: "get", id:"query") do %>
+  <%= label_tag(:q, "Seach for:")%>
+  <%= text_field_tag(:q)%>
+  <%= submit_tag("Search")%>
+  <% end %>
+</div>
