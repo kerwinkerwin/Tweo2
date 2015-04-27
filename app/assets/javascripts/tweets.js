@@ -6,9 +6,10 @@ $(document).ready(function(){
     var url = $(this).attr('action')
     url = url + "?"+data
     $.get(url).done(function(data){
+      // var tweet = JSON.parse(data);
+      // console.log(tweet);
       loadScript();
-      $.when(map.prototype.display_map()).then(map.prototype.hide_search());
-      console.log(data)
+      $.when(map.prototype.displayMap()).then(map.prototype.hideSearch());
     })
   })
 })
@@ -17,19 +18,16 @@ function loadScript() {
   var script = document.createElement("script");
   script.src = "http://maps.googleapis.com/maps/api/js?callback=initialize";
   document.body.appendChild(script);
-}
+};
 
 
 
-function map(){
+function map(){}
 
-
-}
-
-map.prototype.display_map = function(){
+map.prototype.displayMap = function(){
   $("#map-canvas").show();
 };
 
-map.prototype.hide_search = function(){
+map.prototype.hideSearch = function(){
   $(".search").hide();
-}
+};
