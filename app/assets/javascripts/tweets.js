@@ -4,17 +4,27 @@ $(document).ready(function(){
     event.preventDefault()
     var data = $(this).serialize()
     var url = $(this).attr('action')
+    var pins = [];
     url = url + "?"+data
     $.get(url).done(function(data){
-      // var tweet = JSON.parse(data);
-      // console.log(tweet);
       loadScript();
       $.when(map.prototype.displayMap()).then(map.prototype.hideSearch());
+      $.each(data, function(i,value){
+        $.each(value, function(i,value2){
+          var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(value2.latitude,value2.longitude),
+            Map:map,
+            title:value2.text
+          });
+        });
+      });
+
     })
   })
 })
 
 function loadScript() {
+  google.maps.event.addDomListener(window, 'load', initialize);
   var script = document.createElement("script");
   script.src = "http://maps.googleapis.com/maps/api/js?callback=initialize";
   document.body.appendChild(script);
@@ -31,3 +41,12 @@ map.prototype.displayMap = function(){
 map.prototype.hideSearch = function(){
   $(".search").hide();
 };
+
+function initialize() {
+  var mapOptions = {
+    center: { lat: 0, lng:0},
+    zoom: 3
+  };
+  this.map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+}
