@@ -11,11 +11,12 @@ $(document).ready(function(){
       $.when(map.prototype.displayMap()).then(map.prototype.hideSearch());
       $.each(data, function(i,value){
         $.each(value, function(i,value2){
+          var myLatlng = new google.maps.LatLng(value2.latitude,value2.longitude);
           var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(value2.latitude,value2.longitude),
-            Map:map,
+            position: myLatlng,
             title:value2.text
           });
+          marker.setMap(map.prototype.maps);
         });
       });
 
@@ -47,6 +48,16 @@ function initialize() {
     center: { lat: 0, lng:0},
     zoom: 3
   };
+  map.prototype.maps(mapOptions);
+
+};
+
+function map(){}
+
+map.prototype.maps = function(mapOptions){
   this.map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
-}
+};
+map.prototype.addMarker = function(){
+
+};
