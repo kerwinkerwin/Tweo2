@@ -4,7 +4,6 @@ $(document).ready(function(){
     event.preventDefault()
     var data = $(this).serialize()
     var url = $(this).attr('action')
-    var pins = [];
     url = url + "?"+data
     $.get(url).done(function(data){
       loadScript();
@@ -43,10 +42,17 @@ map.prototype.hideSearch = function(){
 };
 
 function initialize() {
+  var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
   var mapOptions = {
     center: { lat: 0, lng:0},
     zoom: 3
   };
-  this.map = new google.maps.Map(document.getElementById('map-canvas'),
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
-}
+
+      var marker = new google.maps.Marker({
+         position: myLatlng,
+         map: map,
+         title: 'Hello World!'
+     });
+};
