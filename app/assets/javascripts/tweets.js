@@ -48,16 +48,15 @@ function initialize() {
     center: { lat: 0, lng:0},
     zoom: 3
   };
-  map.prototype.maps(mapOptions);
+  map.maps(mapOptions);
 
 };
 
-function map(){}
-
-map.prototype.maps = function(mapOptions){
-  this.map = new google.maps.Map(document.getElementById('map-canvas'),
+function map(mapOptions){
+  this.maps = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
-};
+}
+
 map.prototype.addMarker = function(){
 
 };
