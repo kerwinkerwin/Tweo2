@@ -1,7 +1,7 @@
 function tweetController(){
-
+  this.map = new mapModel();
 }
 
-tweetController.prototype.initialize = function(){
-  
-}
+tweetController.prototype.renderMap = function(){
+    this.map.reSizeMap();
+};
