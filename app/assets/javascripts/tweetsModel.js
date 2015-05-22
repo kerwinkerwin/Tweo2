@@ -3,6 +3,7 @@ function tweetModel(){
 }
 
 tweetModel.prototype.getTweets = function(formData){
+  console.log(formData);
   var data = $(formData).serialize()
   var url = $(formData).attr('action')
   url = url + "?"+data
@@ -14,7 +15,7 @@ tweetModel.prototype.getTweets = function(formData){
         pins.push([data["tweets"][i].latitude, data["tweets"][i].longitude]);
       };
     };
-    // console.log(pins);
+    console.log(pins);
     return pins;
   })
 }

@@ -6,7 +6,7 @@ function mapModel(){
   this.map = new google.maps.Map(document.getElementById('map-canvas'),
       this.mapOptions);
       window.onload = this.loadScript;
-      this.createMarker(this.map);
+      // this.createMarker(this.map);
 }
 
 mapModel.prototype.loadScript = function(){
@@ -24,12 +24,13 @@ mapModel.prototype.reSizeMap = function(){
   google.maps.event.trigger(this.map, 'resize')
 };
 
-mapModel.prototype.createMarker = function(map){
-  // console.log(tweet);
+mapModel.prototype.createMarker = function(tweets){
+  var googleMap = this.map
+  console.log(tweets);
   var marker = new google.maps.Marker({
     position: new google.maps.LatLng(-41.282845, 174.765644),
     title: "hello",
-    map:map
+    map:googleMap
   });
 };
 
