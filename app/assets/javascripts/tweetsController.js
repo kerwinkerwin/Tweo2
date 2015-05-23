@@ -4,11 +4,8 @@ function tweetController(){
 };
 
 tweetController.prototype.getTweets = function(formData){
-  console.log(formData);
-  var tweets  = function (){
-  this.tweetModel.getTweets(formData);
-  this.map.createMarker(tweets);
-  }
+//call tweetModel.getTweets with formData
+//call map.createMarker with above^
 };
 
 
@@ -17,6 +14,5 @@ tweetController.prototype.renderMap = function(){
 };
 
 tweetController.prototype.addMarkers = function(tweet){
-
 
 };

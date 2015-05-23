@@ -32,6 +32,7 @@ mapModel.prototype.createMarker = function(tweets){
     title: "hello",
     map:googleMap
   });
+
 };
 
 mapModel.prototype.addMarker = function(marker){
