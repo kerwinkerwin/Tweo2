@@ -1,4 +1,5 @@
 function mapModel(){
+  setAllMap(null);
   this.mapOptions = {
     zoom: 1,
     center: new google.maps.LatLng(-41.282845, 174.765644)
