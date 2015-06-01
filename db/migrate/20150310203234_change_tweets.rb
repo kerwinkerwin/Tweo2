@@ -8,7 +8,7 @@ class ChangeTweets < ActiveRecord::Migration
       t.float :latitude
       t.float :longitude
       t.integer :tweet_id
-      t.integer :score
+      t.float :score
     end
   end
 end

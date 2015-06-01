@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20150310212427) do
     t.float    "latitude"
     t.float    "longitude"
     t.integer  "tweet_id",      limit: 8
-    t.integer  "score"
+    t.float    "score"
   end
 
 end
