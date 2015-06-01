@@ -5,14 +5,14 @@ function tweetController(){
 
 tweetController.prototype.getTweets = function(formData){
 //call tweetModel.getTweets with formData
-//call map.createMarker with above^
+    this.map.getTweets(formData);
+//call map.createMarker with above
 };
-
 
 tweetController.prototype.renderMap = function(){
     this.map.reSizeMap();
 };
 
 tweetController.prototype.addMarkers = function(tweet){
-
+  // this.map.createMarker(tweet);
 };

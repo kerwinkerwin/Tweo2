@@ -1,12 +1,13 @@
 function mapModel(){
   this.mapOptions = {
-    zoom: 8,
+    zoom: 1,
     center: new google.maps.LatLng(-41.282845, 174.765644)
   };
   this.map = new google.maps.Map(document.getElementById('map-canvas'),
       this.mapOptions);
-      window.onload = this.loadScript;
+    window.onload = this.loadScript;
       // this.createMarker(this.map);
+      console.log(this.map);
 }
 
 mapModel.prototype.loadScript = function(){
@@ -25,16 +26,36 @@ mapModel.prototype.reSizeMap = function(){
 };
 
 mapModel.prototype.createMarker = function(tweets){
-  var googleMap = this.map
-  console.log(tweets);
+  var googleMap = this.map;
+  console.log(this.map);
+  console.log(googleMap)
   var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(-41.282845, 174.765644),
+    position: new google.maps.LatLng(tweets[1], tweets[0]),
     title: "hello",
-    map:googleMap
   });
-
+  marker.setMap(googleMap);
 };
 
 mapModel.prototype.addMarker = function(marker){
   // marker.setMap(this.map);
 }
+
+mapModel.prototype.getTweets = function(formData){
+  var data = $(formData).serialize()
+  var url = $(formData).attr('action')
+  url = url + "?"+data
+  var createMarker = this.createMarker.bind(this);
+  var pins = [];
+  $.get(url).done(function(data){
+    tweetController.renderMap();
+    for(var i =0; i<data["tweets"].length; i++){
+      if (data["tweets"][i].latitude != null) {
+        // pins.push([data["tweets"][i].latitude, data["tweets"][i].longitude]);
+        createMarker([data["tweets"][i].latitude, data["tweets"][i].longitude]);
+      };
+    };
+
+    // mapModel.createMarker(pins)
+    // tweetController.addMarkers(pins);
+  })
+};
