@@ -20,7 +20,7 @@ class Tweet < ActiveRecord::Base
 
   def self.search(query)
       Tweet.destroy_all
-      @client.search(query).take(10).each do |tweet|
+      @client.search(query).take(150).each do |tweet|
        Tweet.create(user_id:tweet.user.id, user_name:tweet.user.screen_name, user_location: tweet.user.location, tweet_id: tweet.id, text: tweet.text)
       end
       self.sentiment
