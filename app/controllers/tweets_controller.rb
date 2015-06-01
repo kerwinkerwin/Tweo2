@@ -1,8 +1,10 @@
 class TweetsController < ApplicationController
   def show
-    p params
     Tweet.search(params[:q])
-    @tweets = Tweet.all
+    @tweets = Tweet.all.map do |tweet|
+      [tweet.latitude, tweet.longitude,tweet.score_color, tweet.score, tweet.text]
+    end
+    puts @tweets
     render json: @tweets
   end
 

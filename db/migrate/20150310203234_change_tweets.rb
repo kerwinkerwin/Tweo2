@@ -9,6 +9,7 @@ class ChangeTweets < ActiveRecord::Migration
       t.float :longitude
       t.integer :tweet_id
       t.float :score
+      t.string :score_color
     end
   end
 end

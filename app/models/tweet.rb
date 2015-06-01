@@ -20,14 +20,10 @@ class Tweet < ActiveRecord::Base
 
   def self.search(query)
       Tweet.destroy_all
-      @client.search(query).take(30).each do |tweet|
+      @client.search(query).take(50).each do |tweet|
        Tweet.create(user_id:tweet.user.id, user_name:tweet.user.screen_name, user_location: tweet.user.location, tweet_id: tweet.id, text: tweet.text)
       end
       self.sentiment
-      Tweet.all.each do |tweet|
-        puts tweet.score
-      end
-
   end
 
   def self.sentiment
@@ -36,20 +32,29 @@ class Tweet < ActiveRecord::Base
     analyzer = Sentimental.new
     Tweet.all.each do | tweet|
       score=analyzer.get_score(tweet.text)
-      puts "******"
-      puts score
-      puts "*****"
+      tweet.update(:score_color=>self.color(score))
+      tweet.save
       tweet.update(:score=>score)
       tweet.save
     end
   end
 
   def self.color score
-     if score == 0
-      "#008000"
-     else
-       "FE7569"
+    color = ""
+      if score<0
+       color = "FF0000"
+     elsif score == 0
+       color = "0000FF"
+     elsif score>0 && score<1
+       color = "008080"
+     elsif score >1
+       color ="00FF00"
      end
+
+     puts "**********"
+     puts color
+     puts "**********"
+     return color
   end
 
 end

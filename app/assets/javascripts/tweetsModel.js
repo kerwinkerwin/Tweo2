@@ -11,7 +11,7 @@ tweetModel.prototype.getTweets = function(formData){
     tweetController.renderMap();
     for(var i =0; i<data["tweets"].length; i++){
       if (data["tweets"][i].latitude != null) {
-        pins.push([data["tweets"][i].latitude, data["tweets"][i].longitude, data["tweets"][i].score, data["tweets"][i]]);
+        pins.push([data["tweets"][i].latitude, data["tweets"][i].longitude, data["tweets"][i].score, data["tweets"][i].score_color]);
       };
     };
     return pins;

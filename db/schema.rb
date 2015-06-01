@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150310212427) do
     t.float    "longitude"
     t.integer  "tweet_id",      limit: 8
     t.float    "score"
+    t.string   "score_color"
   end
 
 end

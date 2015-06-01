@@ -14,8 +14,10 @@ mapModel.prototype.reSizeMap = function(){
 };
 
 mapModel.prototype.createMarker = function(tweets){
+  console.log(tweets)
   var googleMap = this.map;
   var pinColor = tweets[2];
+  console.log(tweets[2])
   var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
         new google.maps.Size(21, 34),
         new google.maps.Point(0,0),
@@ -26,7 +28,6 @@ mapModel.prototype.createMarker = function(tweets){
     title: "hello",
     icon: pinImage,
   });
-  console.log(marker);
   marker.setMap(googleMap);
 };
 
@@ -43,9 +44,8 @@ mapModel.prototype.getTweets = function(formData){
   $.get(url).done(function(data){
     tweetController.renderMap();
     for(var i =0; i<data["tweets"].length; i++){
-      if (data["tweets"][i].latitude != null) {
-        console.log(data["tweets"][i].score)
-        createMarker([data["tweets"][i].latitude, data["tweets"][i].longitude, data["tweets"][i].score]);
+      if (data["tweets"][i][0] != null) {
+        createMarker([data["tweets"][i][0], data["tweets"][i][1], data["tweets"][i][2], data["tweets"][i][3]]);
       };
     };
 
